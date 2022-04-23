@@ -157,9 +157,11 @@ Then run <b>``` yarn run serve:dev```</b> in the terminal. The <b>Server is runn
 ```cmd
 npx create-react-app frontend -y
 
+cd frontend
+
 yarn add axios styled-components react-paginate reactstrap bootstrap
 
-cd frontend/src
+cd src
 
 rm App.css App.test.js index.css logo.svg reportWebVitals.js setupTests.js
 
@@ -211,7 +213,7 @@ function App() {
   };
 
    const handleClick = (page) => {
-    //need to increment one in the current page becouse knex pagination start to 0
+    //need to increment one in the current page because knex pagination start to 0
     return setCurrentPage(page + 1)
   }
     
