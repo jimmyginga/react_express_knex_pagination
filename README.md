@@ -4,13 +4,10 @@ When digging the internet on how to render paginated data from back end my team 
 
 ## :star:Prerequisites
 
-1. paginated data served from backend
-2. reactstrap v.8.10.0
-3. styled components v.5.3.1
-4. Reactjs v.17.0.2
-5. yarn (because we prefer it, but you can use npm as well)
-6. git
-7. postgres
+1. Node
+2. yarn (because we prefer it, but you can use npm as well)
+3. git
+4. Postgres
 
 ## :star:Setup backend
 
