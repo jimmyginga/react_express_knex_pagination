@@ -275,10 +275,11 @@ function App() {
 export default App;
 ```
 
-##:computer:Final result
+#:computer:Final result
 
 <img src="./tutuor01.png" alt="My cool logo"/>
 
 <hr/>
 <img src="./tutuor02.png" alt="My cool logo"/>
 
+**Note**: we not applied a hard styles, feels free to contribute with this and others features :wink:.
