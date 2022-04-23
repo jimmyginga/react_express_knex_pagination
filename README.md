@@ -149,7 +149,7 @@ Then run <b>``` yarn run serve:dev```</b> in the terminal, the <b>Server is runn
 ### :dart: Endpoints
 | path        | Method   |Result                   |
 | ------------|----------|-------------------------|
-| /           | get      |Array of pokemon objects |
+| /pokemon    | GET      |Array of pokemon objects |
 
 ## :telescope: Setup frontend
 
