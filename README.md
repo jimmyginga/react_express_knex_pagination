@@ -275,7 +275,7 @@ function App() {
 export default App;
 ```
 
-#:computer:Final result
+# :computer:Final result
 
 <img src="./tutuor01.png" alt="My cool logo"/>
 
@@ -283,3 +283,7 @@ export default App;
 <img src="./tutuor02.png" alt="My cool logo"/>
 
 **Note**: we did not apply hard styles, feel free to contribute with this and other features :wink:.
+
+# :bulb:Conclusion
+
+Our solution using <i>react-paginate</i> brings fractions of that each time a different page number is set in the state of <b>currentPage</b> variable. It led us to adapt the react pagination library to our needs once this one considered all data would be delivered in a single request, and not in page batches. This way to solve the problem demands a new request to the API every time a new page of data is required, but in the other hand doesn't overcharge the frontend with unnecessary data.
