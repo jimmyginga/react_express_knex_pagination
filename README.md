@@ -17,6 +17,11 @@ When digging the internet on how to render paginated data from back end my team 
 Initiate the node project and create folders and files.
 
 ```cmd
+
+mkdir backend
+
+cd backend
+
 yarn init -y
 
 yarn add express dotenv cors knex pg knex-paginate
@@ -26,10 +31,6 @@ yarn add nodemon -D
 touch knexfile.js
 
 touch server.js
-
-mkdir backend
-
-cd backend
 
 mkdir src
 
