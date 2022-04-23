@@ -286,4 +286,4 @@ export default App;
 
 # :bulb:Conclusion
 
-Our solution using <i>knex-paginate</i> brings fractions of data each time a different page number is set in the state of <b>currentPage</b> variable. It led us to adapt the react pagination library to our needs once this one considered all data would be delivered in a single request, and not in page batches. This way to solve the problem demands a new request to the API every time a new page of data is required, but in the other hand doesn't overcharge the frontend with unnecessary data.
+Our solution using <i>knex-paginate</i> library brings fractions of data each time a different page number is set in the state of <b>currentPage</b> variable. It led us to adapt the <i>react-paginate</i> library to our needs once this one considered in its tutorials that all data would be delivered in a single request, and not in page batches. This way to solve the problem demands a new request to the API every time a new page of data is required, but in the other hand doesn't overcharge the frontend with unnecessary data.
