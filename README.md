@@ -1,8 +1,8 @@
-# (temporary title) React pagination with paginated data from knex
+ # :book:React pagination with paginated data from knex  :star: :boom: 
 
 When digging the internet on how to render paginated data from back end my team face a lack of information disregard the topic. So this was our team's solution to exhibit knex backend paginated data in a reasonable way.
 
-## Prerequisites
+## :star:Prerequisites
 
 1. paginated data served from backend
 2. reactstrap v.8.10.0
@@ -12,14 +12,14 @@ When digging the internet on how to render paginated data from back end my team 
 6. git
 7. postgres
 
-## Setup backend
+## :star:Setup backend
 
 Initiate the node project and create folders and files.
 
 ```cmd
 yarn init -y
 
-yarn add express dotenv knex pg knex-paginate
+yarn add express dotenv cors knex pg knex-paginate
 
 yarn add nodemon -D
 
@@ -112,25 +112,29 @@ const server = createServer(app);
 server.listen(PORT, () => console.log(`Server is running on ${PORT} port`));
 ```
 
-## How to send paginated data with knex
+## :star:How to send paginated data with knex
 
 See below an example of controller using node, express and knex
 
-### Controller file
+### :boom:Controller file
 
 app.js
 
 ```js
-// here the import considered knexfile.js to be in config folder
 import express from "express";
+import cors from 'cors'
 import knex from "../knexfile.js";
 import { attachPaginate } from 'knex-paginate'
+
 const app = express();
+app.use(cors())
 attachPaginate()
 
-app.get("/", async (req, res) => {
+app.get("/pokemon", async (req, res) => {
   try {
-    const pokemon = await knex("pokemon").select().paginate({});
+    const { page } = req.query
+    console.log(page);
+    const pokemon = await knex("pokemon").select().paginate({currentPage: page, isLengthAware: true,});
     res.status(200).json(pokemon);
   } catch (error) {
     return res.status(400).json({ message: `Can't list pokemons: ${error}` });
@@ -142,13 +146,139 @@ export { app };
 
 Then run <b>``` yarn run serve:dev```</b> in the terminal, the <b>Server is running on 8008 port </b> log will appear, it means that you can make requests in you <i>http://localhost:8008/</i>
 
-### Endpoints
+### :dart: Endpoints
 | path        | Method   |Result                   |
 | ------------|----------|-------------------------|
 | /           | get      |Array of pokemon objects |
 
-## Setup frontend
+## :telescope: Setup frontend
 
 ```cmd
 npx create-react-app frontend -y
+
+yarn add axios styled-components react-paginate reactstrap bootstrap
+
+cd frontend/src
+
+rm App.css App.test.js index.css logo.svg reportWebVitals.js setupTests.js
+
+touch api.js styles.js
 ```
+
+api.js
+```js
+import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
+
+let baseURL;
+
+if (process.env.NODE_ENV === "production") {
+  baseURL = process.env.REACT_APP_API_URL;
+} else {
+  baseURL = "http://localhost:8008";
+}
+
+export const api = axios.create({
+  baseURL,
+  validateStatus: () => {
+    return true;
+  },
+});
+```
+
+App.js
+```js
+import React from "react";
+import { api } from "./api";
+import { Table } from "reactstrap";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container, MyPaginate } from "./styles";
+
+function App() {
+  const [pokemons, setPokemons] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [totalPages, setTotalPages] = React.useState();
+
+  
+  const getPokemons = async (page) => {
+    await api.get(`/pokemon?page=${page}`).then((result) => {
+      if (result.status !== 200) return alert("Something went wrong!");
+      setTotalPages(result.data.pagination.lastPage)
+      return setPokemons(result.data.data);
+    });
+  };
+
+   const handleClick = (page) => {
+    //need to increment one in the current page becouse knex pagination start to 0
+    return setCurrentPage(page + 1)
+  }
+    
+  React.useEffect(() => {
+    getPokemons(currentPage);
+    return () => {};
+  }, [currentPage]);
+
+  return (
+    <>
+      <div className="body">
+        <div className="div-table pb-5">
+          <Table striped borderless hover responsive className="mb-5">
+            <thead>
+              <tr>
+                <th scope="row">Id</th>
+                <th scope="row">identifier</th>
+                <th scope="row">height</th>
+                <th scope="row">Weight</th>
+                <th scope="row">base_experience</th>
+                <th scope="row">Order</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pokemons.length === 0 ? (
+                <tr className="ml-auto mr-auto">
+                  <td>No pokemon</td>
+                </tr>
+              ) : (
+                pokemons.map((pokemon) => {
+                  return (
+                    <tr key={pokemon.id}>
+                      <td>{pokemon.id}</td>
+                      <td>{pokemon.identifier}</td>
+                      <td>{pokemon.height}</td>
+                      <td>{pokemon.weight}</td>
+                      <td>{pokemon.base_experience}</td>
+                      <td>{pokemon.order}</td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </Table>
+        </div>
+         <Container>
+          <MyPaginate
+            className="noselect"
+            breakLabel="..."
+            nextLabel={">>"}
+            pageRangeDisplayed={5}
+            onPageChange={(e) => handleClick(e.selected)}
+            pageCount={Number(totalPages)}
+            previousLabel={"<<"}
+          />
+        </Container> 
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+##:computer:Final result
+
+<img src="./tutuor01.png" alt="My cool logo"/>
+
+<hr/>
+<img src="./tutuor02.png" alt="My cool logo"/>
+
