@@ -1,6 +1,6 @@
  # :book:React pagination with paginated data from knex  :star: :boom: 
 
-When digging the internet on how to render paginated data from back end my team face a lack of information disregard the topic. So this was our team's solution to exhibit knex backend paginated data in a reasonable way.
+When digging the internet on how to render paginated data from back end my team faced a lack of information disregard the topic. So this was our team's solution to exhibit knex backend paginated data in a reasonable way.
 
 ## :star:Prerequisites
 
@@ -144,7 +144,7 @@ app.get("/pokemon", async (req, res) => {
 export { app };
 ```
 
-Then run <b>``` yarn run serve:dev```</b> in the terminal, the <b>Server is running on 8008 port </b> log will appear, it means that you can make requests in you <i>http://localhost:8008/</i>
+Then run <b>``` yarn run serve:dev```</b> in the terminal. The <b>Server is running on 8008 port </b> message will appear, it means that you can make requests for <i>http://localhost:8008/</i>
 
 ### :dart: Endpoints
 | path        | Method   |Result                   |
@@ -282,4 +282,4 @@ export default App;
 <hr/>
 <img src="./tutuor02.png" alt="My cool logo"/>
 
-**Note**: we not applied a hard styles, feels free to contribute with this and others features :wink:.
+**Note**: we did not apply hard styles, feel free to contribute with this and other features :wink:.
